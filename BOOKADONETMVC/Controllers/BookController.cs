@@ -58,19 +58,25 @@ namespace BOOKADONETMVC.Controllers
         // GET: BookController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var result=crud.GetBookById(id);
+            return View(result);
         }
 
         // POST: BookController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Book book)
         {
+
             try
             {
-                return RedirectToAction(nameof(Index));
+                int result = crud.UpdateBook(book);
+                if (result == 1)
+                    return RedirectToAction(nameof(Index));
+                else
+                    return View();
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
@@ -79,19 +85,25 @@ namespace BOOKADONETMVC.Controllers
         // GET: BookController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var result=crud.GetBookById(id);
+            return View(result);
         }
 
         // POST: BookController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [ActionName("Delete")]
+        public ActionResult DeleteConfirm(int id)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                int result = crud.DeleteBook(id);
+                if (result == 1)
+                    return RedirectToAction(nameof(Index));
+                else
+                    return View();
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }

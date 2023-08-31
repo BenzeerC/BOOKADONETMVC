@@ -80,7 +80,7 @@ namespace BOOKADONETMVC.Models
         {
             book.isActive = 1;
             int result = 0;
-            string qry = "update BookAdoNET set name=@name,price=@price,author=@author,isActive=@isActive whehre id=@id";
+            string qry = "update BookAdoNET set name=@name,price=@price,author=@author,isActive=@isActive where id=@id";
             cmd = new SqlCommand(qry, con);
             cmd.Parameters.AddWithValue("@name", book.Name);
             cmd.Parameters.AddWithValue("@price", book.Price);
@@ -98,7 +98,7 @@ namespace BOOKADONETMVC.Models
         public int DeleteBook(int id)
         {
             int result = 0;
-            string qry = "update BookAdoNET set isActive=0 whehre id=@id";
+            string qry = "update BookAdoNET set isActive=0 where id=@id";
             cmd = new SqlCommand(qry, con);
             cmd.Parameters.AddWithValue("@id", id);
             con.Open();
